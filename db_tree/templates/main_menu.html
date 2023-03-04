@@ -1,0 +1,26 @@
+<ul class="first">
+{% for child in new %}
+    <a href="{% url 'db_too_tree:index' child %}">
+        {{ child }}
+    </a>
+    {% for children in child.dirs.all %}
+        {% if children != current_dir %}
+            <li class="inner">
+                <a href="{% url 'db_too_tree:index' children %}">
+                    {{ children }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+<li>Current menu: {{ current_dir }}</li>
+<ul class="first">
+{% for child in current_dir.dirs.all %}
+    <li class="inner">
+        <a href="{% url 'db_too_tree:index' child %}">
+            {{ child }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+</ul>
